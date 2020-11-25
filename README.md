@@ -11,8 +11,12 @@ Readers will start at the beginning of any story. If there are multiple links br
 ## Developers
 
 ### Install and Run
-Once you've cloned this repo, please run `npm i` to install the node modules necessary to run the project. Then to run the project, run `npm run start`.
-
+Once you've forked this repo, clone the newly forked repo in your terminal in whatever directory you want to store the project. Then run the following commands:
+```
+cd ./chainletter
+npm i
+npm run start
+```
 ### Assign Issues
 The issues tab on this project will continually be maintained. Peruse the issues page to find any issues you'd like to work on. Issues marked "good first issue" are a good start if you're not sure what to work on. Please post a message in the Now Loading Discord server if you're unsure where to start or if you have any questions with a particular issue.
 
