@@ -1,0 +1,45 @@
+button {
+  border-radius: 5px;
+  padding:10px;
+  text-align: center;
+  white-space: nowrap;
+  background: none;
+  border:none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  &.primary {
+    border: 1px solid #323232;
+    color: #ffffff;
+    background-color: #323232;
+    
+    &:hover {
+      background-color: #000000;
+    }
+  }
+  &.secondary {
+    color: #323232;
+    background-color: transparent;
+    border: 1px solid #323232;
+
+    &:hover {
+      color: #000000;
+      border-color: #000000;
+      background-color: #ffffff;
+    }
+  }
+  &.text {
+    text-decoration: none;
+    font-weight: 700;
+
+    &:hover {
+      text-decoration: underline;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &:visited {
+    color:inherit;
+  }
+}

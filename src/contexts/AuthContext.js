@@ -17,15 +17,19 @@ const AuthProvider = ({ children }) => {
     auth.signInWithEmailAndPassword(email, pass);
   };
 
+  const logout = () => {
+    auth.signOut();
+  };
+
   const value = {
     currentUser,
     signup,
     login,
+    logout,
   };
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      console.log(user);
       setCurrentUser(user);
     });
     return unsubscribe;
