@@ -1,16 +1,17 @@
-import React, { Suspense } from 'react';
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import App from './components/templates/App';
 import { AuthProvider } from './contexts/AuthContext';
 import './index.css';
 
 const Wrappers = () => (
   <AuthProvider>
-    <Suspense fallback={<h3>Loading...</h3>}>
+    <Router>
       <React.StrictMode>
         <App />
       </React.StrictMode>
-    </Suspense>
+    </Router>
   </AuthProvider>
 );
 
