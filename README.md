@@ -25,3 +25,5 @@ Some issues will be labeled Pair Programming to indicate a good task to program 
 
 ## More to Come
 This README file will continue to develop as we make progress on the project. Some issues will include making additions to this very file. 
+
+<!-- clean lineendings -->

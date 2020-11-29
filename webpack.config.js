@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 const PORT = process.env.PORT || 3001;
-
+// todo: clean line endings
 module.exports = {
   mode: 'development',
   entry: './src/index.js',

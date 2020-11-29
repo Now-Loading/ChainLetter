@@ -5,7 +5,7 @@ import Footer from '../organisms/Footer';
 import Home from './Home';
 import About from './About';
 import './App.css';
-
+// todo: clean lineendings
 const App = () => (
   <>
     <header>

@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { auth } from '../firebase';
-
+// todo: clean line endings
 const AuthContext = React.createContext();
 
 const useAuthContext = () => useContext(AuthContext);

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import App from './components/templates/App';
 import { AuthProvider } from './contexts/AuthContext';
 import './index.css';
-
+// todo: clean line endings
 const Wrappers = () => (
   <AuthProvider>
     <Router>

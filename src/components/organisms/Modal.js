@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Modal.scss';
 import Button from '../atoms/Button';
-
+// todo: clean lineendings
 const Modal = ({
   title,
   subTitle,
