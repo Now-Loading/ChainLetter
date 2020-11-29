@@ -18,7 +18,6 @@ const Modal = ({
     submitHandler(e);
   };
   const handleCancel = () => {
-    console.log('about to cancel');
     cancelHandler();
   };
 

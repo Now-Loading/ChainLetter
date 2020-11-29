@@ -5,43 +5,66 @@ import Button from '../atoms/Button';
 import Modal from './Modal';
 import './Nav.scss';
 
-const Nav = () => {
-  const { currentUser, logout, login } = useAuthContext();
-  const [isLoginClicked, setIsLoginClicked] = useState(false);
+const modalStates = {
+  closed: 'CLOSED',
+  login: 'LOGIN',
+  signup: 'SIGNUP',
+};
 
-  const handleLoginClick = () => {
-    setIsLoginClicked((prev) => !prev);
-  };
+const Nav = () => {
+  const {
+    currentUser,
+    logout,
+    login,
+    signup,
+  } = useAuthContext();
+  const [modalState, setModalState] = useState(modalStates.closed);
+
+  // const handleModalState = (e) => setModalState(e.value);
 
   const handleLogin = (e) => {
     const { email, password } = e.target.elements;
     login(email.value, password.value);
-    handleLoginClick();
+    setModalState(modalStates.closed);
+  };
+
+  const handleSignup = (e) => {
+    const { email, password } = e.target.elements;
+    signup(email.value, password.value);
+    setModalState(modalStates.closed);
   };
 
   const UserElements = () => {
     if (currentUser) {
       return (
-        <Button
-          type="button"
-          clickHandler={logout}
-          variant="primary"
-          text="Logout"
-        />
+        <>
+          <Button
+            type="button"
+            clickHandler={logout}
+            variant="text"
+            text="Logout"
+          />
+          <Link to="/link">
+            <Button
+              type="button"
+              variant="primary"
+              text="+"
+            />
+          </Link>
+        </>
       );
     }
     return (
       <>
-        <Link to="/signup">
-          <Button
-            type="button"
-            variant="primary"
-            text="Sign Up"
-          />
-        </Link>
         <Button
           type="button"
-          clickHandler={handleLoginClick}
+          clickHandler={() => setModalState(modalStates.signup)}
+          variant="primary"
+          text="Sign Up"
+        />
+        <Button
+          type="button"
+          clickHandler={() => setModalState(modalStates.login)}
           variant="secondary"
           text="Login"
         />
@@ -72,13 +95,33 @@ const Nav = () => {
         <UserElements />
       </section>
       {
-        isLoginClicked && (
+        modalState === modalStates.login && (
           <Modal
             title="Login"
             submitHandler={handleLogin}
             confirmText="Login"
             canCancel
-            cancelHandler={handleLoginClick}
+            cancelHandler={() => setModalState(modalStates.closed)}
+          >
+            <label htmlFor="email">
+              Email
+              <input type="text" name="email" />
+            </label>
+            <label htmlFor="password">
+              Password
+              <input type="password" name="password" />
+            </label>
+          </Modal>
+        )
+      }
+      {
+        modalState === modalStates.signup && (
+          <Modal
+            title="Sign Up"
+            submitHandler={handleSignup}
+            confirmText="Sign Up"
+            canCancel
+            cancelHandler={() => setModalState(modalStates.closed)}
           >
             <label htmlFor="email">
               Email
