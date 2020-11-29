@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Button.scss';
-// TODO: handle line endings
+
 const Button = ({
   type,
   variant,

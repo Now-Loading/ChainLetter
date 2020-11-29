@@ -1,6 +1,6 @@
 import React from 'react';
 import PropType from 'prop-types';
-// todo: clean lineendings
+
 const StoryList = ({
   stories,
 }) => {
