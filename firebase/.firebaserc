@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "chain-letter",
+    "staging": "dev-chain-letter"
+  }
+}

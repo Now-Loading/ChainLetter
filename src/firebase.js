@@ -12,5 +12,13 @@ const app = firebase.initializeApp({
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 });
 
-export const auth = app.auth();
+const auth = app.auth();
+const db = app.firestore();
+
+if (process.env.NODE_ENV === 'development') {
+  auth.useEmulator('http://localhost:9099');
+  db.useEmulator('http://localhost', 8090);
+}
+
+export { auth, db };
 export default app;
