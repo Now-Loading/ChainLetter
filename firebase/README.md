@@ -24,7 +24,4 @@ With your emulators running, navigate to http://localhost:8091 to view the fires
 
 You will be able to log into Chain-Letter with this user once you've started up the app! That's it for firebase. Once we start adding data to the database, I'll add more instructions for that to here.
 
-## Setup your .env file
-In the root directory, you should see a `tmp.env.development` file. rename the file by removing the `tmp` part of the name. it should just look like `.env.development` now.
-
 Go back to the instructions on the root directory's README file to run the app.
