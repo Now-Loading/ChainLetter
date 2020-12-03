@@ -41,7 +41,7 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 You can close out of powershell, now.
 
-## Install and Run
+## Install the Project
 Now that you've got your environment all setup let's get started with installing the app!
 ### Forking
 In order to contribute to this repository, you must fork your own version of the repo. What forking does is creates a copy of the repo and hosts it in your personal account. So instead of working on github.com/Now-Loading/ChainLetter, you'll be working on github.com/YourName/ChainLetter. You'll still be able to merge your additions to the main repo, so don't worry.
