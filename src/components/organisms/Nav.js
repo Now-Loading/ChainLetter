@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext';
 import Button from '../atoms/Button';
-// import AddStory from '../templates/AddStory';
+import AddStory from '../templates/AddStory';
 import Modal from './Modal';
 import './Nav.scss';
 
@@ -21,8 +21,6 @@ const Nav = () => {
   } = useAuthContext();
   const [modalState, setModalState] = useState(modalStates.closed);
   const [isAddingStory, setIsAddingStory] = useState(false);
-
-  // const handleModalState = (e) => setModalState(e.value);
 
   const handleLogin = (e) => {
     const { email, password } = e.target.elements;
@@ -52,29 +50,7 @@ const Nav = () => {
             text="+"
             clickHandler={() => setIsAddingStory(true)}
           />
-          { isAddingStory && (
-            <Modal
-              title="Create New Story Link"
-              subTitle="write the first lines of a brand new story"
-              confirmText="Submit Story"
-              canCancel
-              submitHandler={() => {}}
-              cancelHandler={() => setIsAddingStory(false)}
-            >
-              <label htmlFor="story-add-title">
-                <div>
-                  Title
-                </div>
-                <input id="story-add-title" type="text" name="title" />
-              </label>
-              <label htmlFor="story-add-content">
-                <div>
-                  Story
-                </div>
-                <textarea id="story-add-content" type="password" name="content" />
-              </label>
-            </Modal>
-          ) }
+          { isAddingStory && <AddStory toggleModal={setIsAddingStory} />}
         </>
       );
     }
