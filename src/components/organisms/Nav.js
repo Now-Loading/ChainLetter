@@ -22,18 +22,29 @@ const Nav = () => {
   const [modalState, setModalState] = useState(modalStates.closed);
   const [isAddingStory, setIsAddingStory] = useState(false);
 
-  const handleLogin = (e) => {
-    const { email, password } = e.target.elements;
+  /**
+   * Take values from form to attempt a login
+   * @param {Object} event
+   */
+  const handleLogin = (event) => {
+    const { email, password } = event.target.elements;
     login(email.value, password.value);
     setModalState(modalStates.closed);
   };
 
-  const handleSignup = (e) => {
-    const { email, password } = e.target.elements;
+  /**
+   * Take values from form to attempt a signup
+   * @param {Object} event
+   */
+  const handleSignup = (event) => {
+    const { email, password } = event.target.elements;
     signup(email.value, password.value);
     setModalState(modalStates.closed);
   };
 
+  /**
+   * Elements specific to being logged in/authenticated
+   */
   const UserElements = () => {
     if (currentUser) {
       return (

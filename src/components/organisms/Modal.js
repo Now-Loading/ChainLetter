@@ -17,6 +17,7 @@ const Modal = ({
     e.preventDefault();
     submitHandler(e);
   };
+
   const handleCancel = () => {
     cancelHandler();
   };

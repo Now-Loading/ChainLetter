@@ -14,10 +14,10 @@ const AddStory = ({ toggleModal }) => {
 
   /**
    * Attempts to add story to firestore when user clicks submit
-   * @param {Object} e - event that is injected from onSubmit
+   * @param {Object} event
    */
-  const addNewStory = async (e) => {
-    e.preventDefault();
+  const addNewStory = async (event) => {
+    event.preventDefault();
     // don't attempt if no values in the form fields
     if (
       !newStory.title.trim()
@@ -43,10 +43,10 @@ const AddStory = ({ toggleModal }) => {
 
   /**
    * Saves values of field to localStorage whenever user changes field
-   * @param {Object} e - event that is injected from onSubmit
+   * @param {Object} event
    */
-  const handleStoryContentChange = (e) => {
-    const { name, value } = e.target;
+  const handleStoryContentChange = (event) => {
+    const { name, value } = event.target;
     if (name === 'title' && value.length > 75) return;
     if (name === 'content' && value.length > 240) return;
 
