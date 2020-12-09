@@ -6,7 +6,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "emulators:start": "cd ./firebase && firebase emulators:start --import=./seeds",
+    "emulators:start:clean": "cd ./firebase && firebase emulators:start"
   },
   "keywords": [],
   "author": "",
