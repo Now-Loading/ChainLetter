@@ -1,24 +1,24 @@
 import React, { useState, useLayoutEffect } from 'react';
+import { db } from '../../firebase';
 import StoryList from '../organisms/StoryList';
-
-const story = {
-  title: 'Test',
-  content: 'Some story content',
-};
-const tmpStories = Array(5).fill({ ...story });
 
 const Home = () => {
   const [stories, setStories] = useState([]);
 
   useLayoutEffect(() => {
-    setStories(tmpStories);
+    const getLinks = async () => {
+      const snapshot = await db.collection('links')
+        .get();
+
+      const docs = snapshot.docs.map((doc) => doc.data());
+
+      setStories(docs);
+    };
+
+    getLinks();
   }, []);
 
-  return (
-    stories.length
-      ? <StoryList stories={stories} />
-      : <span>Loading...</span>
-  );
+  return !!stories.length && <StoryList stories={stories} />;
 };
 
 export default Home;
