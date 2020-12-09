@@ -18,7 +18,11 @@ const db = app.firestore();
 
 if (process.env.NODE_ENV === 'development') {
   auth.useEmulator('http://localhost:9099');
-  db.useEmulator('http://localhost', 8090);
+  db.useEmulator('http://localhost', 9098);
+  db.settings({
+    host: 'localhost:9098',
+    ssl: false,
+  });
 }
 
 export { auth, db };
