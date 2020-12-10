@@ -10,8 +10,7 @@ const StoryList = ({ stories }) => (
           <header>
             <h3>{story.title}</h3>
             <span className="byline">
-              by&nbsp;
-              {story.author}
+              {`by ${story.author}`}
             </span>
           </header>
           <p>
