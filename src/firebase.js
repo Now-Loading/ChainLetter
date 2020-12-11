@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 
-const app = firebase.initializeApp({
+const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
   databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
@@ -11,14 +11,20 @@ const app = firebase.initializeApp({
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
-});
+};
+
+const app = firebase.initializeApp(config);
 
 const auth = app.auth();
 const db = app.firestore();
 
 if (process.env.NODE_ENV === 'development') {
   auth.useEmulator('http://localhost:9099');
-  db.useEmulator('http://localhost', 8090);
+  db.useEmulator('http://localhost', 9098);
+  db.settings({
+    host: 'localhost:9098',
+    ssl: false,
+  });
 }
 
 export { auth, db };
