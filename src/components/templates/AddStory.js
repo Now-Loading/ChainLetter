@@ -18,27 +18,20 @@ const AddStory = ({ toggleModal }) => {
    */
   const addNewStory = async (event) => {
     event.preventDefault();
-    // don't attempt if no values in the form fields
+    // don't attempt if no values in the form fields OR if the user is not logged in
     if (
       !newStory.title.trim()
       || !newStory.content.trim()
-    ) return;
-    //don't attempt if the user is not logged in
-    if (
-      !currentUser
-    ) return;
-    //don't attempt if there is no local user date
-    if (
-      !Date.now()
+      || !currentUser
     ) return;
     try {
       await db.collection('links')
         .add({
           title: newStory.title,
           content: newStory.content,
-          author: currentUser.displayName,
+          authorName: currentUser.displayName,
           authorId: currentUser.uid,
-          timestamp: Date.now(),
+          createdDate: db.now(),
           tags: '',
           parentStoryId: '',
         });
