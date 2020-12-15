@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import firebase from 'firebase/app';
 import PropTypes from 'prop-types';
 import Modal from '../organisms/Modal';
 import { db } from '../../firebase';
@@ -31,7 +32,7 @@ const AddStory = ({ toggleModal }) => {
           content: newStory.content,
           authorName: currentUser.displayName,
           authorId: currentUser.uid,
-          createdDate: db.now(),
+          createdDate: firebase.firestore.Timestamp.now(),
           tags: '',
           parentStoryId: '',
         });
