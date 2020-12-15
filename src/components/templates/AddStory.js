@@ -23,13 +23,16 @@ const AddStory = ({ toggleModal }) => {
       !newStory.title.trim()
       || !newStory.content.trim()
     ) return;
-
     try {
       await db.collection('links')
         .add({
           title: newStory.title,
           content: newStory.content,
           author: currentUser.displayName,
+          authorId: currentUser.uid,
+          timestamp: Date.now(),
+          tags: '',
+          parentStoryId: '',
         });
       localStorage.removeItem('story-title');
       localStorage.removeItem('story-content');
