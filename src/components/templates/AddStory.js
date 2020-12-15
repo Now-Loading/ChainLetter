@@ -23,6 +23,14 @@ const AddStory = ({ toggleModal }) => {
       !newStory.title.trim()
       || !newStory.content.trim()
     ) return;
+    //don't attempt if the user is not logged in
+    if (
+      !currentUser
+    ) return;
+    //don't attempt if there is no local user date
+    if (
+      !Date.now()
+    ) return;
     try {
       await db.collection('links')
         .add({
