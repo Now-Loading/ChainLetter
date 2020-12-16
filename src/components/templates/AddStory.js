@@ -49,6 +49,7 @@ const AddStory = ({ toggleModal }) => {
     const { name, value } = event.target;
     if (name === 'title' && value.length > 75) return;
     if (name === 'content' && value.length > 240) return;
+    if (name === 'tags' && (/^[a-zA-Z0-9- ]*$/.test(value) === false)) console.log('stop!');
 
     setNewStory((prev) => ({
       ...prev,
@@ -92,6 +93,24 @@ const AddStory = ({ toggleModal }) => {
       <span>
         Characters Left:
         {240 - newStory.content.length}
+      </span>
+      <label htmlFor="story-add-content">
+        <div>
+          Tags
+        </div>
+        <input
+          type="text"
+          id="story-add-tags"
+          name="tags"
+          value={newStory.tags}
+          onChange={handleStoryContentChange}
+        />
+      </label>
+      <span>
+        Each tag must be separated by a comma.
+      </span>
+      <span>
+        No special characters allowed.
       </span>
     </Modal>
   );
