@@ -65,7 +65,7 @@ const AddStory = ({ toggleModal }) => {
   };
 
   const onKeyUp = (event) => {
-    if (event.key === ',' || event.key === 'Enter' || event.key === ' ') {
+    if (event.key === ',' || event.key === 'Enter') {
       if (tags.length === 3) {
         return;
       }
