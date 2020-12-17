@@ -70,7 +70,7 @@ const AddStory = ({ toggleModal }) => {
       // reset tags input value
       setNewStory((prev) => ({
         ...prev,
-        [tags]: '',
+        tags: '',
       }));
     }
   };
