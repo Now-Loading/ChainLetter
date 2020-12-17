@@ -10,7 +10,10 @@ const AddStory = ({ toggleModal }) => {
   const [newStory, setNewStory] = useState({
     title: localStorage.getItem('story-title') || '',
     content: localStorage.getItem('story-content') || '',
+    tags: localStorage.getItem('story-tags') || '',
   });
+
+  const [tags, setTags] = useState([]);
 
   /**
    * Attempts to add story to firestore when user clicks submit
@@ -47,15 +50,29 @@ const AddStory = ({ toggleModal }) => {
    */
   const handleStoryContentChange = (event) => {
     const { name, value } = event.target;
+    let formattedValue = value;
     if (name === 'title' && value.length > 75) return;
     if (name === 'content' && value.length > 240) return;
-    if (name === 'tags' && (/^[a-zA-Z0-9- ]*$/.test(value) === false)) console.log('stop!');
+    if (name === 'tags') {
+      formattedValue = formattedValue.replace(/[^\w]/, '');
+    }
 
     setNewStory((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: formattedValue,
     }));
-    localStorage.setItem(`story-${name}`, value);
+    localStorage.setItem(`story-${name}`, formattedValue);
+  };
+
+  const onKeyUp = (event) => {
+    if (event.key === (',') || event.key === ('Enter') || event.key === (' ')) {
+      setTags((prev) => [...prev, newStory.tags]);
+      // reset tags input value
+      setNewStory((prev) => ({
+        ...prev,
+        [tags]: '',
+      }));
+    }
   };
 
   return (
@@ -104,8 +121,10 @@ const AddStory = ({ toggleModal }) => {
           name="tags"
           value={newStory.tags}
           onChange={handleStoryContentChange}
+          onKeyUp={onKeyUp}
         />
       </label>
+      {tags ? (tags.map((tag) => (`#${tag} `))) : <></>}
       <span>
         Each tag must be separated by a comma.
       </span>
