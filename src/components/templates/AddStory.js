@@ -33,9 +33,11 @@ const AddStory = ({ toggleModal }) => {
           title: newStory.title,
           content: newStory.content,
           author: currentUser.displayName,
+          tags: [...tags],
         });
       localStorage.removeItem('story-title');
       localStorage.removeItem('story-content');
+      localStorage.removeItem('story-tags');
     } catch (err) {
       console.log(err);
       throw err;
