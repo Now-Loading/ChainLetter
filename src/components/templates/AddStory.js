@@ -65,13 +65,20 @@ const AddStory = ({ toggleModal }) => {
   };
 
   const onKeyUp = (event) => {
-    if (event.key === (',') || event.key === ('Enter') || event.key === (' ')) {
+    if (tags.length === 3) return;
+    if (event.key === ',' || event.key === 'Enter' || event.key === ' ') {
       setTags((prev) => [...prev, newStory.tags]);
-      // reset tags input value
       setNewStory((prev) => ({
         ...prev,
         tags: '',
       }));
+    }
+    if (event.key === 'Backspace') {
+      setTags((prev) => {
+        const newTags = [...prev];
+        newTags.pop();
+        return newTags;
+      });
     }
   };
 
