@@ -61,7 +61,7 @@ const AddStory = ({ toggleModal }) => {
   const button = (
     <Button
       type="button"
-      text="Submit"
+      text="Submit Story"
       clickHandler={addNewStory}
       variant="primary"
     />
@@ -71,7 +71,6 @@ const AddStory = ({ toggleModal }) => {
     <Modal
       title="Create New Story Link"
       subTitle="write the first lines of a brand new story"
-      confirmText="Submit Story"
       cancelHandler={() => toggleModal(false)}
       buttons={button}
     >
