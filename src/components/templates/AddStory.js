@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import firebase from 'firebase/app';
 import PropTypes from 'prop-types';
 import Modal from '../organisms/Modal';
 import { db } from '../../firebase';
@@ -19,18 +20,22 @@ const AddStory = ({ toggleModal }) => {
    */
   const addNewStory = async (event) => {
     event.preventDefault();
-    // don't attempt if no values in the form fields
+    // don't attempt if no values in the form fields OR if the user is not logged in
     if (
       !newStory.title.trim()
       || !newStory.content.trim()
+      || !currentUser
     ) return;
-
     try {
       await db.collection('links')
         .add({
           title: newStory.title,
           content: newStory.content,
-          author: currentUser.displayName,
+          authorName: currentUser.displayName,
+          authorId: currentUser.uid,
+          createdDate: firebase.firestore.Timestamp.now(),
+          tags: '',
+          parentStoryId: '',
         });
       localStorage.removeItem('story-title');
       localStorage.removeItem('story-content');
