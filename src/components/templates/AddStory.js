@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import firebase from 'firebase/app';
 import PropTypes from 'prop-types';
 import Modal from '../organisms/Modal';
 import { db } from '../../firebase';
 import { useAuthContext } from '../../contexts/AuthContext';
+import Button from '../atoms/Button';
 
 const AddStory = ({ toggleModal }) => {
   const { currentUser } = useAuthContext();
@@ -21,19 +23,22 @@ const AddStory = ({ toggleModal }) => {
    */
   const addNewStory = async (event) => {
     event.preventDefault();
-    // don't attempt if no values in the form fields
+    // don't attempt if no values in the form fields OR if the user is not logged in
     if (
       !newStory.title.trim()
       || !newStory.content.trim()
+      || !currentUser
     ) return;
-
     try {
       await db.collection('links')
         .add({
           title: newStory.title,
           content: newStory.content,
-          author: currentUser.displayName,
           tags: [...tags],
+          authorName: currentUser.displayName,
+          authorId: currentUser.uid,
+          createdDate: firebase.firestore.Timestamp.now(),
+          parentStoryId: '',
         });
       localStorage.removeItem('story-title');
       localStorage.removeItem('story-content');
@@ -86,14 +91,21 @@ const AddStory = ({ toggleModal }) => {
     }
   };
 
+  const button = (
+    <Button
+      type="button"
+      text="Submit Story"
+      clickHandler={addNewStory}
+      variant="primary"
+    />
+  );
+
   return (
     <Modal
       title="Create New Story Link"
       subTitle="write the first lines of a brand new story"
-      confirmText="Submit Story"
-      canCancel
-      submitHandler={addNewStory}
       cancelHandler={() => toggleModal(false)}
+      buttons={button}
     >
       <label htmlFor="story-add-title">
         <div>

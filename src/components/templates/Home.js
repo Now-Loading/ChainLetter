@@ -10,8 +10,10 @@ const Home = () => {
       const snapshot = await db.collection('links')
         .get();
 
-      const docs = snapshot.docs.map((doc) => doc.data());
-
+      const docs = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
       setStories(docs);
     };
 
