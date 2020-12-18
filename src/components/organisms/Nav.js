@@ -111,7 +111,6 @@ const Nav = () => {
             title="Login"
             submitHandler={handleLogin}
             confirmText="Login"
-            canCancel
             cancelHandler={() => setModalState(modalStates.closed)}
           >
             <label htmlFor="email">
@@ -131,7 +130,6 @@ const Nav = () => {
             title="Sign Up"
             submitHandler={handleSignup}
             confirmText="Sign Up"
-            canCancel
             cancelHandler={() => setModalState(modalStates.closed)}
           >
             <label htmlFor="email">

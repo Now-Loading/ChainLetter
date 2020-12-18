@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Modal from '../organisms/Modal';
 import { db } from '../../firebase';
 import { useAuthContext } from '../../contexts/AuthContext';
+import Button from '../atoms/Button';
 
 const AddStory = ({ toggleModal }) => {
   const { currentUser } = useAuthContext();
@@ -57,14 +58,21 @@ const AddStory = ({ toggleModal }) => {
     localStorage.setItem(`story-${name}`, value);
   };
 
+  const button = (
+    <Button
+      type="button"
+      text="Submit Story"
+      clickHandler={addNewStory}
+      variant="primary"
+    />
+  );
+
   return (
     <Modal
       title="Create New Story Link"
       subTitle="write the first lines of a brand new story"
-      confirmText="Submit Story"
-      canCancel
-      submitHandler={addNewStory}
       cancelHandler={() => toggleModal(false)}
+      buttons={button}
     >
       <label htmlFor="story-add-title">
         <div>
