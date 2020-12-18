@@ -62,7 +62,7 @@ const AddStory = ({ toggleModal }) => {
     <Button
       type="button"
       text="Submit"
-      onClick={addNewStory}
+      clickHandler={addNewStory}
       variant="primary"
     />
   );
@@ -73,7 +73,7 @@ const AddStory = ({ toggleModal }) => {
       subTitle="write the first lines of a brand new story"
       confirmText="Submit Story"
       cancelHandler={() => toggleModal(false)}
-      buttons={[button]}
+      buttons={button}
     >
       <label htmlFor="story-add-title">
         <div>
