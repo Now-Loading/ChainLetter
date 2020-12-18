@@ -27,7 +27,7 @@ const Modal = ({
       <form
         onSubmit={
           submitHandler
-            ? submitHandler()
+            ? (event) => submitHandler(event)
             : (event) => event.preventDefault()
         }
       >
