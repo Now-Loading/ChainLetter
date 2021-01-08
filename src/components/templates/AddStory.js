@@ -147,7 +147,7 @@ const AddStory = ({ toggleModal }) => {
           onKeyUp={onKeyUp}
         />
       </label>
-      {tags ? (tags.map((tag) => (`#${tag} `))) : <></>}
+      { Boolean(tags) && tags.map((tag) => `#${tag} `) }
       <span>
         Each tag must be separated by a comma.
       </span>
