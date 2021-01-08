@@ -34,7 +34,7 @@ const AddStory = ({ toggleModal }) => {
         .add({
           title: newStory.title,
           content: newStory.content,
-          tags: [...tags],
+          tags: tags,
           authorName: currentUser.displayName,
           authorId: currentUser.uid,
           createdDate: firebase.firestore.Timestamp.now(),
