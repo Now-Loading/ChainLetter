@@ -12,7 +12,10 @@ const AddStory = ({ toggleModal }) => {
   const [newStory, setNewStory] = useState({
     title: localStorage.getItem('story-title') || '',
     content: localStorage.getItem('story-content') || '',
+    tags: localStorage.getItem('story-tags') || '',
   });
+
+  const [tags, setTags] = useState([]);
 
   /**
    * Attempts to add story to firestore when user clicks submit
@@ -31,14 +34,15 @@ const AddStory = ({ toggleModal }) => {
         .add({
           title: newStory.title,
           content: newStory.content,
+          tags: tags,
           authorName: currentUser.displayName,
           authorId: currentUser.uid,
           createdDate: firebase.firestore.Timestamp.now(),
-          tags: '',
           parentStoryId: '',
         });
       localStorage.removeItem('story-title');
       localStorage.removeItem('story-content');
+      localStorage.removeItem('story-tags');
     } catch (err) {
       console.log(err);
       throw err;
@@ -53,14 +57,38 @@ const AddStory = ({ toggleModal }) => {
    */
   const handleStoryContentChange = (event) => {
     const { name, value } = event.target;
+    let formattedValue = value;
     if (name === 'title' && value.length > 75) return;
     if (name === 'content' && value.length > 240) return;
+    if (name === 'tags') {
+      formattedValue = formattedValue.replace(/[^\w]/, '');
+    }
 
     setNewStory((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: formattedValue,
     }));
-    localStorage.setItem(`story-${name}`, value);
+    localStorage.setItem(`story-${name}`, formattedValue);
+  };
+
+  const onKeyUp = (event) => {
+    if (event.key === ',' || event.key === 'Enter') {
+      if (tags.length === 3) {
+        return;
+      }
+      setTags((prev) => [...prev, newStory.tags]);
+      setNewStory((prev) => ({
+        ...prev,
+        tags: '',
+      }));
+    }
+    if (newStory.tags === '' && event.key === 'Backspace') {
+      setTags((prev) => {
+        const newTags = [...prev];
+        newTags.pop();
+        return newTags;
+      });
+    }
   };
 
   const button = (
@@ -105,6 +133,26 @@ const AddStory = ({ toggleModal }) => {
       <span>
         Characters Left:
         {240 - newStory.content.length}
+      </span>
+      <label htmlFor="story-add-content">
+        <div>
+          Tags
+        </div>
+        <input
+          type="text"
+          id="story-add-tags"
+          name="tags"
+          value={newStory.tags}
+          onChange={handleStoryContentChange}
+          onKeyUp={onKeyUp}
+        />
+      </label>
+      { Boolean(tags) && tags.map((tag) => `#${tag} `) }
+      <span>
+        Each tag must be separated by a comma.
+      </span>
+      <span>
+        No special characters allowed.
       </span>
     </Modal>
   );
