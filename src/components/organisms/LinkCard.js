@@ -5,7 +5,11 @@ import './LinkCard.scss';
 const LinkCard = ({ story }) => (
   <article className="link-card">
     <div className="side-bar">
-      <p>bar</p>
+      <div className="icon">icon</div>
+      <div className="links">
+        <p>links</p>
+        <p>stars</p>
+      </div>
     </div>
     <div className="card">
       <header>
