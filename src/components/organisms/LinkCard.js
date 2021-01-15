@@ -3,15 +3,15 @@ import PropType from 'prop-types';
 import './LinkCard.scss';
 
 const LinkCard = ({ story }) => (
-  <article className="link-card">
+  <article className="card">
     <div className="side-bar">
-      <div className="icon">icon</div>
-      <div className="links">
+      <div className="side-bar-icon">icon</div>
+      <div className="side-bar-links">
         <p>links</p>
         <p>stars</p>
       </div>
     </div>
-    <div className="card">
+    <div className="card-info">
       <header>
         <span className="byline">
           {`${story.authorName} on ${new Date(story.createdDate * 1000).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: '2-digit' })}`}

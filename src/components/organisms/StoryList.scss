@@ -1,6 +1,17 @@
-.story-list {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
+.story-list-component {
+  display:flex;
+  flex-direction: row;
+  
+    .story-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+
+  .user-info-panel{
+    height: 405px;
+  }
+
+  
 
 }

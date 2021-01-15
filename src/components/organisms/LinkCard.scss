@@ -1,11 +1,14 @@
-.link-card {
+
+
+  .card {
     font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    width: 500px;
+    width: 460px;
+    min-height: 134px;
     margin: 10px;
     border-radius: 5px;
     background-color: #f1f1f1;
     display: flex;
-
+    flex-direction: row;
 
     .side-bar{
       height: 100%;
@@ -13,19 +16,20 @@
       flex-direction: column;
       align-items: center;
 
-      .icon {
+      .side-bar-icon {
           width: 100%;
           height: 30px;
           background: rgba(83, 131, 188, 0.6);
       }
-      .links{
+      .side-bar-links{
           height: 100%;
           background: rgba(83, 131, 188, 0.8);
       }
     }
 
-    .card {
+    .card-info {
      padding: 15px;
+     width: 100%;
     }
 
     h3 {
@@ -41,3 +45,12 @@
         font-size: .8rem;
     }
 }
+
+  .user-info-panel {
+    background-color: #f1f1f1;
+    margin: 10px;
+    width: 200px;
+    text-align: center;
+    padding: 15px;
+  }
+
