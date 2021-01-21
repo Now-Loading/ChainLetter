@@ -32,7 +32,7 @@ const LinkCard = ({ story }) => {
           </span>
           <h3>{story.title}</h3>
         </header>
-        <p>
+        <p className="story-content">
           {story.content}
         </p>
       </div>
