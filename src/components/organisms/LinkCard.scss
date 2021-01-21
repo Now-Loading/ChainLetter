@@ -37,7 +37,7 @@
             align-items: center;
           }
       }
-      .side-bar-links{
+      .side-bar-icons{
           width:100%;
           height: 100%;
           border-bottom-left-radius: 5px;
@@ -46,11 +46,20 @@
           flex-direction: column;
           align-items: center;
           padding-top: 10px;
+
+          .links, .stars {
+            text-align: center;
+            padding-bottom: 10px;
+          }
+
+          p {
+            font-size: 8px;
+          }
       }
     }
 
     .card-info {
-     padding: 15px;
+     padding: 15px 15px 20px 15px;
      width: 100%;
     }
 

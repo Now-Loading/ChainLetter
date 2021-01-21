@@ -14,7 +14,7 @@ const LinkCard = ({ story }) => {
         <div className="side-bar-user-icon">
           {currentUser.photoUrl ? <img src={currentUser.photoURL} alt="userImage" className="user-image" /> : <p className="user-initial">{currentUser.displayName.charAt(0).toUpperCase()}</p>}
         </div>
-        <div className="side-bar-links">
+        <div className="side-bar-icons">
           <div className="links">
             <AiOutlineLink />
             <p>5</p>
