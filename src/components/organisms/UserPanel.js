@@ -8,18 +8,32 @@ const UserPanel = () => {
   const { currentUser } = useAuthContext();
 
   return (
-    <div className="userPanel">
-      {currentUser.photoURL ? <img src={currentUser.photoURL} alt="userImage" className="userImage" /> : <></>}
+    <div className="user-panel">
+      {currentUser.photoURL ? <img src={currentUser.photoURL} alt="userImage" className="user-image" /> : <></>}
       {/* below is a placeholder for the URL above, which is always currently blank */}
-      <img src="https://i.imgur.com/LbDUJDk.jpg" alt="harold" className="userImage" />
+      <img src="https://i.imgur.com/LbDUJDk.jpg" alt="harold" className="user-image" />
       <h3>{currentUser.displayName}</h3>
-      <div className="panelLinks">
+      <div className="panel-links">
         {/* below need to be changed to links */}
-        <h4>Profile</h4>
-        <h4>Bookmarks</h4>
-        <h4>Started</h4>
-        <h4>Contributed</h4>
-        <h4>Drafts</h4>
+        <div className="panel-link-individual">
+          <h4>Profile</h4>
+        </div>
+        <div className="panel-link-individual">
+          <h4>Bookmarks</h4>
+          <p>5</p>
+        </div>
+        <div className="panel-link-individual">
+          <h4>Contributed</h4>
+          <p>13</p>
+        </div>
+        <div className="panel-link-individual">
+          <h4>Contributed</h4>
+          <p>24</p>
+        </div>
+        <div className="panel-link-individual">
+          <h4>Drafts</h4>
+          <p>3</p>
+        </div>
       </div>
     </div>
   );
