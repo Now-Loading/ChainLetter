@@ -1,8 +1,8 @@
 import React from 'react';
 import PropType from 'prop-types';
 import LinkCard from './LinkCard';
+import UserPanel from './UserPanel';
 import { useAuthContext } from '../../contexts/AuthContext';
-
 import './StoryList.scss';
 
 const StoryList = ({ stories }) => {
@@ -17,9 +17,7 @@ const StoryList = ({ stories }) => {
           ))
         }
       </section>
-      <article className="user-info-panel">
-        <h3>{currentUser.displayName}</h3>
-      </article>
+      {currentUser ? <UserPanel /> : <></>}
     </div>
   );
 };
