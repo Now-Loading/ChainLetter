@@ -19,7 +19,6 @@ const Modal = ({
     }
     cancelHandler(event);
   };
-
   return (
     <div
       className="modal"
