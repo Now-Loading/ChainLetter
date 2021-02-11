@@ -26,9 +26,9 @@ const Nav = () => {
   const [modalState, setModalState] = useState(modalStates.closed);
   const [isAddingStory, setIsAddingStory] = useState(false);
   const [isDisabled] = useState(true);
-  const [isUsername, setUsername] = useState('');
-  const [isEmail, setEmail] = useState('');
-  const [isPassword, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [nameError, setNameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
