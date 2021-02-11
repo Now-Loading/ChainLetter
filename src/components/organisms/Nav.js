@@ -190,8 +190,8 @@ const Nav = () => {
                 type="text"
                 name="name"
                 value={isUsername}
-                onChange={(e) => { handleNameChange(e); }}
-                onBlur={(e) => { validation(e); }}
+                onChange={handleNameChange}
+                onBlur={validation}
                 required
               />
             </label>
