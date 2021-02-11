@@ -47,8 +47,8 @@ const Nav = () => {
    * @param {Object} event
    */
   const handleSignup = (event) => {
-    const { name, email, password } = event.target.elements;
-    signup(name.value, email.value, password.value);
+    const { email, password } = event.target.elements;
+    signup(email.value, password.value);
     setModalState(modalStates.closed);
   };
 
