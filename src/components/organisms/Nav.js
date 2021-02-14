@@ -24,11 +24,11 @@ const Nav = () => {
     signup,
   } = useAuthContext();
   const [modalState, setModalState] = useState(modalStates.closed);
-  const [isAddingStory, setIsAddingStory] = useState(false);
-  const [isDisabled] = useState(true);
-  const [isUsername, setUsername] = useState('');
-  const [isEmail, setEmail] = useState('');
-  const [isPassword, setPassword] = useState('');
+  const [AddingStory, setIsAddingStory] = useState(false);
+  const [Disabled] = useState(true);
+  const [Username, setUsername] = useState('');
+  const [Email, setEmail] = useState('');
+  const [Password, setPassword] = useState('');
   const [nameError, setNameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -189,7 +189,7 @@ const Nav = () => {
               <input
                 type="text"
                 name="name"
-                value={isUsername}
+                value={Username}
                 onChange={(e) => { handleNameChange(e); }}
                 onBlur={(e) => { validation(e); }}
                 required
@@ -202,7 +202,7 @@ const Nav = () => {
                 type="text"
                 name="email"
                 required
-                value={isEmail}
+                value={Email}
                 onChange={(e) => { handleEmailChange(e); }}
                 onBlur={(e) => { validation(e); }}
               />
@@ -213,7 +213,7 @@ const Nav = () => {
               <input
                 type="password"
                 name="password"
-                value={isPassword}
+                value={Password}
                 onChange={(e) => { handlePasswordChange(e); }}
                 onBlur={(e) => { validation(e); }}
                 required
