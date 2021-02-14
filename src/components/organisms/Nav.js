@@ -24,8 +24,8 @@ const Nav = () => {
     signup,
   } = useAuthContext();
   const [modalState, setModalState] = useState(modalStates.closed);
-  const [AddingStory, setIsAddingStory] = useState(false);
-  const [Disabled] = useState(true);
+  const [isAddingStory, setIsAddingStory] = useState(false);
+  const [isDisabled] = useState(true);
   const [Username, setUsername] = useState('');
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
