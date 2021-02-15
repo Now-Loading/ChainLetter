@@ -26,9 +26,9 @@ const Nav = () => {
   const [modalState, setModalState] = useState(modalStates.closed);
   const [isAddingStory, setIsAddingStory] = useState(false);
   const [isDisabled] = useState(true);
-  const [Username, setUsername] = useState('');
-  const [Email, setEmail] = useState('');
-  const [Password, setPassword] = useState('');
+  const [usernameInput, setUsernameInput] = useState('');
+  const [emailInput, setEmailInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
   const [nameError, setNameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -53,13 +53,13 @@ const Nav = () => {
   };
 
   const handleNameChange = (event) => {
-    setUsername(event.target.value);
+    setUsernameInput(event.target.value);
   };
   const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+    setEmailInput(event.target.value);
   };
   const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+    setPasswordInput(event.target.value);
   };
 
   // // Disabling signup if input is empty/un-validated
@@ -120,7 +120,6 @@ const Nav = () => {
           clickHandler={() => setModalState(modalStates.signup)}
           variant="primary"
           text="Sign Up"
-          id="buttonSubmit"
           disabled={isDisabled}
         />
         <Button
@@ -189,9 +188,9 @@ const Nav = () => {
               <input
                 type="text"
                 name="name"
-                value={Username}
-                onChange={(e) => { handleNameChange(e); }}
-                onBlur={(e) => { validation(e); }}
+                value={usernameInput}
+                onChange={() => { handleNameChange(); }}
+                onBlur={() => { validation(); }}
                 required
               />
             </label>
@@ -202,9 +201,9 @@ const Nav = () => {
                 type="text"
                 name="email"
                 required
-                value={Email}
-                onChange={(e) => { handleEmailChange(e); }}
-                onBlur={(e) => { validation(e); }}
+                value={emailInput}
+                onChange={() => { handleEmailChange(); }}
+                onBlur={() => { validation(); }}
               />
             </label>
               {emailError}
@@ -213,9 +212,9 @@ const Nav = () => {
               <input
                 type="password"
                 name="password"
-                value={Password}
-                onChange={(e) => { handlePasswordChange(e); }}
-                onBlur={(e) => { validation(e); }}
+                value={passwordInput}
+                onChange={() => { handlePasswordChange(); }}
+                onBlur={() => { validation(); }}
                 required
               />
             </label>
