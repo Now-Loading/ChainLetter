@@ -25,7 +25,6 @@ const Nav = () => {
   } = useAuthContext();
   const [modalState, setModalState] = useState(modalStates.closed);
   const [isAddingStory, setIsAddingStory] = useState(false);
-  const [isDisabled] = useState(true);
   const [usernameInput, setUsernameInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
@@ -61,35 +60,38 @@ const Nav = () => {
   const handlePasswordChange = (event) => {
     setPasswordInput(event.target.value);
   };
-
   // // Disabling signup if input is empty/un-validated
   const validation = (e) => {
     const { name, value } = e.target;
     if (name === 'name') {
       if (value.length > 20) {
-        setNameError('Username must be less than 20 characters');
+        setNameError('Username must be longer than 4 characters, less than 20 characters, and must not contain any special characters');
       } else if (value.length < 4) {
-        setNameError('Username must be longer than 4 characters');
+        setNameError('Username must be longer than 4 characters, less than 20 characters, and must not contain any special characters');
       } else if (REGEX_SPECIAL_CHARACTER.test(value)) {
-        setNameError('Username must not contain any special characters');
-      }
+        setNameError('Username must be longer than 4 characters, less than 20 characters, and must not contain any special characters');
+      } else setNameError('');
     }
 
     if (name === 'email') {
       if (REGEX_EMAIL_VALID.test(value)) {
-        setEmailError('Email should be a valid email');
-      }
+        setEmailError('');
+      } else setEmailError('Email should be a valid email');
     }
 
     if (name === 'password') {
       if (value.length < 8) {
-        setPasswordError('Password should not be less than 8 characters');
-      } else if (REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(value)) {
-        setPasswordError('Password must contain 1 upper case letter, lower case letter, number and special character');
-      }
+        setPasswordError('Password should not be less than 8 characters, must contain 1 upper case letter, lower case letter, number and special character');
+      } else if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(value)) {
+        setPasswordError('Password should not be less than 8 characters, must contain 1 upper case letter, lower case letter, number and special character');
+      } else setPasswordError('');
     }
+    const button = document.querySelectorAll('button');
+    if (usernameInput < 1 && emailInput < 1 && passwordInput < 1) {
+      console.log(button);
+      button[5].disabled = true;
+    } else button[5].disabled = false;
   };
-
   /**
    * Elements specific to being logged in/authenticated
    */
@@ -120,8 +122,8 @@ const Nav = () => {
           clickHandler={() => setModalState(modalStates.signup)}
           variant="primary"
           text="Sign Up"
-          disabled={isDisabled}
         />
+
         <Button
           type="button"
           clickHandler={() => setModalState(modalStates.login)}
@@ -189,36 +191,36 @@ const Nav = () => {
                 type="text"
                 name="name"
                 value={usernameInput}
-                onChange={() => { handleNameChange(); }}
-                onBlur={() => { validation(); }}
+                onChange={handleNameChange}
+                onBlur={validation}
                 required
               />
             </label>
-              {nameError}
+            <p>{nameError}</p>
             <label htmlFor="email">
               Email
               <input
                 type="text"
                 name="email"
-                required
                 value={emailInput}
-                onChange={() => { handleEmailChange(); }}
-                onBlur={() => { validation(); }}
+                onChange={handleEmailChange}
+                onBlur={validation}
+                required
               />
             </label>
-              {emailError}
+            <p>{emailError}</p>
             <label htmlFor="password">
               Password
               <input
                 type="password"
                 name="password"
                 value={passwordInput}
-                onChange={() => { handlePasswordChange(); }}
-                onBlur={() => { validation(); }}
+                onChange={handlePasswordChange}
+                onBlur={validation}
                 required
               />
             </label>
-            {passwordError}
+            <p>{passwordError}</p>
           </Modal>
         )
       }
