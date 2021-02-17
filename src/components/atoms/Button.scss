@@ -15,6 +15,11 @@ button {
     &:hover {
       background-color: #000000;
     }
+
+    &:disabled {
+      background-color: #a0a0a0;
+      color: #fafafa;
+    }
   }
   &.secondary {
     color: #323232;
@@ -42,4 +47,5 @@ button {
   &:visited {
     color:inherit;
   }
+  
 }

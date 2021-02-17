@@ -12,6 +12,7 @@ const Modal = ({
   cancelHandler,
   confirmText,
   cancelText,
+  canSubmit,
 }) => {
   const handleCancel = (event) => {
     if (!cancelHandler) {
@@ -53,6 +54,7 @@ const Modal = ({
               type="submit"
               text={confirmText}
               variant="primary"
+              disabled={!canSubmit}
             />
           )}
         </footer>
@@ -72,6 +74,7 @@ Modal.propTypes = {
   cancelHandler: PropTypes.func,
   confirmText: PropTypes.string,
   cancelText: PropTypes.string,
+  canSubmit: PropTypes.bool,
 };
 
 Modal.defaultProps = {
@@ -83,4 +86,5 @@ Modal.defaultProps = {
   cancelHandler: null,
   confirmText: 'Confirm',
   cancelText: 'Cancel',
+  canSubmit: true,
 };

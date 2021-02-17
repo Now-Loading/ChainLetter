@@ -31,6 +31,7 @@ const Nav = () => {
   const [nameError, setNameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+
   /**
    * Take values from form to attempt a login
    * @param {Object} event
@@ -46,6 +47,13 @@ const Nav = () => {
    * @param {Object} event
    */
   const handleSignup = (event) => {
+    event.preventDefault();
+    if (
+      passwordError
+      || emailError
+      || nameError
+    ) return;
+
     const { email, password } = event.target.elements;
     signup(email.value, password.value);
     setModalState(modalStates.closed);
@@ -60,9 +68,13 @@ const Nav = () => {
   const handlePasswordChange = (event) => {
     setPasswordInput(event.target.value);
   };
-  // // Disabling signup if input is empty/un-validated
-  const validation = (e) => {
-    const { name, value } = e.target;
+
+  /**
+   * Disabling signup if input is empty/un-validated
+   * @param {object} event
+   */
+  const validation = (event) => {
+    const { name, value } = event.target;
     if (name === 'name') {
       if (value.length > 20) {
         setNameError('Username must be longer than 4 characters, less than 20 characters, and must not contain any special characters');
@@ -70,27 +82,26 @@ const Nav = () => {
         setNameError('Username must be longer than 4 characters, less than 20 characters, and must not contain any special characters');
       } else if (REGEX_SPECIAL_CHARACTER.test(value)) {
         setNameError('Username must be longer than 4 characters, less than 20 characters, and must not contain any special characters');
-      } else setNameError('');
+      } else {
+        setNameError('');
+      }
     }
 
     if (name === 'email') {
       if (REGEX_EMAIL_VALID.test(value)) {
         setEmailError('');
-      } else setEmailError('Email should be a valid email');
+      } else {
+        setEmailError('Email should be a valid email');
+      }
     }
 
     if (name === 'password') {
-      if (value.length < 8) {
+      if (value.length < 8 || !REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(value)) {
         setPasswordError('Password should not be less than 8 characters, must contain 1 upper case letter, lower case letter, number and special character');
-      } else if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(value)) {
-        setPasswordError('Password should not be less than 8 characters, must contain 1 upper case letter, lower case letter, number and special character');
-      } else setPasswordError('');
+      } else {
+        setPasswordError('');
+      }
     }
-    const button = document.querySelectorAll('button');
-    if (usernameInput < 1 && emailInput < 1 && passwordInput < 1) {
-      console.log(button);
-      button[5].disabled = true;
-    } else button[5].disabled = false;
   };
   /**
    * Elements specific to being logged in/authenticated
@@ -184,6 +195,11 @@ const Nav = () => {
             submitHandler={handleSignup}
             confirmText="Sign Up"
             cancelHandler={() => setModalState(modalStates.closed)}
+            canSubmit={!(
+              passwordError
+              || emailError
+              || nameError
+            )}
           >
             <label htmlFor="name">
               Display Name
