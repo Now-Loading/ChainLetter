@@ -6,6 +6,10 @@ import AddStory from '../templates/AddStory';
 import Modal from './Modal';
 import './Nav.scss';
 
+const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&])[\S]+/;
+const REGEX_SPECIAL_CHARACTER = /[ !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/g;
+const REGEX_EMAIL_VALID = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 const modalStates = {
   closed: 'CLOSED',
   login: 'LOGIN',
@@ -21,6 +25,12 @@ const Nav = () => {
   } = useAuthContext();
   const [modalState, setModalState] = useState(modalStates.closed);
   const [isAddingStory, setIsAddingStory] = useState(false);
+  const [usernameInput, setUsernameInput] = useState('');
+  const [emailInput, setEmailInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
+  const [nameError, setNameError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   /**
    * Take values from form to attempt a login
@@ -37,11 +47,62 @@ const Nav = () => {
    * @param {Object} event
    */
   const handleSignup = (event) => {
+    event.preventDefault();
+    if (
+      passwordError
+      || emailError
+      || nameError
+    ) return;
+
     const { email, password } = event.target.elements;
     signup(email.value, password.value);
     setModalState(modalStates.closed);
   };
 
+  const handleNameChange = (event) => {
+    setUsernameInput(event.target.value);
+  };
+  const handleEmailChange = (event) => {
+    setEmailInput(event.target.value);
+  };
+  const handlePasswordChange = (event) => {
+    setPasswordInput(event.target.value);
+  };
+
+  /**
+   * Disabling signup if input is empty/un-validated
+   * @param {object} event
+   */
+  const validation = (event) => {
+    const { name, value } = event.target;
+    if (name === 'name') {
+      if (value.length > 20) {
+        setNameError('Username must be longer than 4 characters, less than 20 characters, and must not contain any special characters');
+      } else if (value.length < 4) {
+        setNameError('Username must be longer than 4 characters, less than 20 characters, and must not contain any special characters');
+      } else if (REGEX_SPECIAL_CHARACTER.test(value)) {
+        setNameError('Username must be longer than 4 characters, less than 20 characters, and must not contain any special characters');
+      } else {
+        setNameError('');
+      }
+    }
+
+    if (name === 'email') {
+      if (REGEX_EMAIL_VALID.test(value)) {
+        setEmailError('');
+      } else {
+        setEmailError('Email should be a valid email');
+      }
+    }
+
+    if (name === 'password') {
+      if (value.length < 8 || !REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(value)) {
+        setPasswordError('Password should not be less than 8 characters, must contain 1 upper case letter, lower case letter, number and special character');
+      } else {
+        setPasswordError('');
+      }
+    }
+  };
   /**
    * Elements specific to being logged in/authenticated
    */
@@ -73,6 +134,7 @@ const Nav = () => {
           variant="primary"
           text="Sign Up"
         />
+
         <Button
           type="button"
           clickHandler={() => setModalState(modalStates.login)}
@@ -105,6 +167,7 @@ const Nav = () => {
         </Link>
         <UserElements />
       </section>
+      {/* login modal */}
       {
         modalState === modalStates.login && (
           <Modal
@@ -124,6 +187,7 @@ const Nav = () => {
           </Modal>
         )
       }
+      {/* signup modal */}
       {
         modalState === modalStates.signup && (
           <Modal
@@ -131,15 +195,48 @@ const Nav = () => {
             submitHandler={handleSignup}
             confirmText="Sign Up"
             cancelHandler={() => setModalState(modalStates.closed)}
+            canSubmit={!(
+              passwordError
+              || emailError
+              || nameError
+            )}
           >
+            <label htmlFor="name">
+              Display Name
+              <input
+                type="text"
+                name="name"
+                value={usernameInput}
+                onChange={handleNameChange}
+                onBlur={validation}
+                required
+              />
+            </label>
+            <p>{nameError}</p>
             <label htmlFor="email">
               Email
-              <input type="text" name="email" />
+              <input
+                type="text"
+                name="email"
+                value={emailInput}
+                onChange={handleEmailChange}
+                onBlur={validation}
+                required
+              />
             </label>
+            <p>{emailError}</p>
             <label htmlFor="password">
               Password
-              <input type="password" name="password" />
+              <input
+                type="password"
+                name="password"
+                value={passwordInput}
+                onChange={handlePasswordChange}
+                onBlur={validation}
+                required
+              />
             </label>
+            <p>{passwordError}</p>
           </Modal>
         )
       }
