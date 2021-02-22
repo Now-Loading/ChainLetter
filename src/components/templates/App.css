@@ -16,3 +16,11 @@ main {
 .app-container h1 {
   margin-bottom: 1rem;
 }
+
+.about {
+  height: 100px;
+  margin: 40px;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
