@@ -9,8 +9,22 @@ const useAuthContext = () => useContext(AuthContext);
 const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
 
-  const signup = (email, pass) => {
-    auth.createUserWithEmailAndPassword(email, pass);
+  const signup = (email, pass, displayName) => {
+    auth.createUserWithEmailAndPassword(email, pass)
+      .then((userCredential) => {
+        const { user } = userCredential;
+        const documentId = {
+          id: user.uid,
+          email,
+          displayName,
+        };
+        console.log(documentId);
+      });
+    // need to add error handling?
+    // .catch((error) => {
+    //   var errorCode = error.code;
+    //   var errorMessage = error.message;
+    // });
   };
 
   const login = (email, pass) => {
