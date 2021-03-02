@@ -13,9 +13,10 @@ const AuthProvider = ({ children }) => {
     auth.createUserWithEmailAndPassword(email, pass)
       .then((userCredential) => {
         const { user } = userCredential;
+        console.log(user);
         const userDocument = {
           id: user.uid,
-          email,
+          email: user.email,
           displayName,
         };
         console.log(userDocument);
