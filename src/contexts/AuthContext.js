@@ -13,12 +13,12 @@ const AuthProvider = ({ children }) => {
     auth.createUserWithEmailAndPassword(email, pass)
       .then((userCredential) => {
         const { user } = userCredential;
-        const documentId = {
+        const userDocument = {
           id: user.uid,
           email,
           displayName,
         };
-        console.log(documentId);
+        console.log(userDocument);
       });
     // need to add error handling?
     // .catch((error) => {
