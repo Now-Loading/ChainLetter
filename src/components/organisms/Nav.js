@@ -54,8 +54,8 @@ const Nav = () => {
       || nameError
     ) return;
 
-    const { email, password } = event.target.elements;
-    signup(email.value, password.value);
+    const { email, password, name } = event.target.elements;
+    signup(email.value, password.value, name.value);
     setModalState(modalStates.closed);
   };
 

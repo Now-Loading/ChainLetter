@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 
 const AuthContext = React.createContext();
 
@@ -9,8 +9,20 @@ const useAuthContext = () => useContext(AuthContext);
 const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
 
-  const signup = (email, pass) => {
-    auth.createUserWithEmailAndPassword(email, pass);
+  const signup = (email, pass, displayName) => {
+    auth.createUserWithEmailAndPassword(email, pass)
+      .then((userCredential) => {
+        const { user } = userCredential;
+        db.collection('users').doc(`${user.uid}`).set({
+          email: user.email,
+          displayName,
+        });
+      });
+    // need to add error handling ?
+    // .catch((error) => {
+    //   var errorCode = error.code;
+    //   var errorMessage = error.message;
+    // });
   };
 
   const login = (email, pass) => {

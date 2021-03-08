@@ -4,6 +4,10 @@ main {
   justify-content: center;
 }
 
+.modal-popup{
+  width: 300px;
+}
+
 .app-container {
   display: flex;
   flex-direction: column;
