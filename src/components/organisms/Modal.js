@@ -26,6 +26,7 @@ const Modal = ({
       className="modal"
     >
       <form
+        className="modal-popup"
         onSubmit={
           submitHandler
             ? (event) => submitHandler(event)
